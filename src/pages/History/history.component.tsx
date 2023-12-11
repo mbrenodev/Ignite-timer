@@ -1,35 +1,22 @@
-import { useContext, useState } from 'react'
-import { HistoryContainer, HistoryList, Pagination, Status } from './styles'
-import { CyclesContext } from '../../contexts/CyclesContext'
-import { formatDistanceToNow } from 'date-fns'
+import { useHistoryHook } from './history.hook'
 import ptBR from 'date-fns/locale/pt-BR'
+import { formatDistanceToNow } from 'date-fns'
 import { CaretLeft, CaretRight } from 'phosphor-react'
 
+import {
+  HistoryContainer,
+  HistoryList,
+  Pagination,
+  Status,
+} from './history.styles'
+
 export function History() {
-  const { cycles } = useContext(CyclesContext)
-
-  const itensPerPage = 5
-  const [currentPage, setCurrentPage] = useState(0)
-
-  const startIndex = currentPage * itensPerPage
-  const endIndex = startIndex + itensPerPage
-
-  const currentItens = cycles.slice(startIndex, endIndex)
-
-  const pages = Math.ceil(cycles.length / itensPerPage)
-
-  function handleNextPage() {
-    setCurrentPage(currentPage + 1)
-  }
-
-  function handlePrevPage() {
-    setCurrentPage(currentPage - 1)
-  }
+  const { handleNextPage, handlePrevPage, currentPage, currentItens, pages } =
+    useHistoryHook()
 
   return (
     <HistoryContainer>
       <h1>Meu histórico</h1>
-
       {/* <pre>{JSON.stringify(cycles, null, 2)}</pre> */}
       <HistoryList>
         <table>
@@ -55,7 +42,7 @@ export function History() {
                   </td>
                   <td>
                     {cycle.finishedDate && (
-                      <Status statuscolor="green">Concluido</Status>
+                      <Status statuscolor="green">Concluído</Status>
                     )}
                     {cycle.interruptedDate && (
                       <Status statuscolor="red">Interrompido</Status>
