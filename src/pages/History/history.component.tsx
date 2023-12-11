@@ -56,21 +56,25 @@ export function History() {
             })}
           </tbody>
         </table>
-
-        <Pagination>
-          <button onClick={() => handlePrevPage()} disabled={currentPage === 0}>
-            <CaretLeft />
-          </button>
-          <span>
-            {currentPage + 1} de {pages}
-          </span>
-          <button
-            onClick={() => handleNextPage()}
-            disabled={pages === currentPage + 1}
-          >
-            <CaretRight />
-          </button>
-        </Pagination>
+        {currentItens.length > 0 && (
+          <Pagination>
+            <button
+              onClick={() => handlePrevPage()}
+              disabled={currentPage === 0}
+            >
+              <CaretLeft />
+            </button>
+            <span>
+              {currentPage + 1} de {pages}
+            </span>
+            <button
+              onClick={() => handleNextPage()}
+              disabled={pages === currentPage + 1}
+            >
+              <CaretRight />
+            </button>
+          </Pagination>
+        )}
       </HistoryList>
     </HistoryContainer>
   )
