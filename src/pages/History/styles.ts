@@ -60,6 +60,30 @@ export const HistoryList = styled.div`
     }
   }
 `
+export const Pagination = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  position: fixed;
+  bottom: 8rem;
+  left: 45.4%;
+
+  button {
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
+    background: ${(props) => props.theme['green-500']};
+  }
+
+  button:disabled {
+    background: ${(props) => props.theme['green-700']};
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+`
 
 const STATUS_COLORS = {
   yellow: 'yellow-500',
